@@ -35,14 +35,14 @@ async function accessWebsite() {
 }
 
 async function enterUsername() {
-    const usernameField = await driver.wait(until.elementLocated(By.id('id_username')), 10000);
+    const usernameField = await driver.wait(until.elementLocated(By.id('id_username')));
     await usernameField.sendKeys(username);
     await takeScreenshot(driver, 'username');
     console.log('Username entered');
 }
 
 async function enterPassword() {
-    const passwordField = await driver.wait(until.elementLocated(By.id('id_password')), 10000);
+    const passwordField = await driver.wait(until.elementLocated(By.id('id_password')));
     await passwordField.sendKeys(password);
     await takeScreenshot(driver, 'password');
     console.log('Password entered');
@@ -61,7 +61,7 @@ async function clickLogin() {
 // find crm 
 async function clickOnCRM() {
     //wait for the CRM card to be visible
-    await driver.wait(until.elementLocated(By.xpath('//div[@class="app-card"]//div[2]/div/h2[text()="CRM"]')), 10000);
+    await driver.wait(until.elementLocated(By.xpath('//div[@class="app-card"]//div[2]/div/h2[text()="CRM"]')));
     //find the CRM card and click it
     await driver.findElement(By.xpath('//div[@class="app-card"]//div[2]/div/h2[text()="CRM"]')).click();
     console.log('Navigated to CRM successfully');
@@ -70,7 +70,7 @@ async function clickOnCRM() {
 };
 async function navigateToUnifiedLeads() {
     //wait for the Unified Leads link to be visible
-    await driver.wait(until.elementLocated(By.xpath('//a[@href="lead_management/unifiedleadcontact/" and text()="Unified Leads"]')), 10000);
+    await driver.wait(until.elementLocated(By.xpath('//a[@href="lead_management/unifiedleadcontact/" and text()="Unified Leads"]')));
     //find the Unified Leads link and click it
     await driver.findElement(By.xpath('//a[@href="lead_management/unifiedleadcontact/" and text()="Unified Leads"]')).click();
     console.log('Navigated to Unified Leads successfully');
@@ -79,7 +79,7 @@ async function navigateToUnifiedLeads() {
 };
 async function clickAddLeads() {
     //wait for the create new  Lead link to be visible
-    await driver.wait(until.elementLocated(By.xpath('//a[@href="/crm/lead_management/unifiedleadcontact/add/"]')), 10000);
+    await driver.wait(until.elementLocated(By.xpath('//a[@href="/crm/lead_management/unifiedleadcontact/add/"]')));
     //find the create new  Lead link and click it
     await driver.findElement(By.xpath('//a[@href="/crm/lead_management/unifiedleadcontact/add/"]')).click();
     console.log('Clicked on Add Lead button successfully');
@@ -88,7 +88,7 @@ async function clickAddLeads() {
 };
 async function findFieldandEnterDetails() {
     //wait for the fields to be visible
-    let first_name = await driver.wait(until.elementLocated(By.id('id_first_name')), 25000);
+    let first_name = await driver.wait(until.elementLocated(By.id('id_first_name')));
     if (first_name) {
         console.log('First Name field is visible');
         first_name.sendKeys(generateRandomName());
@@ -100,7 +100,7 @@ async function findFieldandEnterDetails() {
         console.error('First Name field is not visible');
     }
 
-    let last_name = await driver.wait(until.elementLocated(By.id('id_last_name')), 10000);
+    let last_name = await driver.wait(until.elementLocated(By.id('id_last_name')));
     if (last_name) {
         console.log('Last Name field is visible');
         await last_name.sendKeys(generateRandomName());
@@ -112,7 +112,7 @@ async function findFieldandEnterDetails() {
         console.error('Last Name field is not visible');
     }
 
-    let primary_contact_number = await driver.wait(until.elementLocated(By.id('id_primary_contact_number')), 10000);
+    let primary_contact_number = await driver.wait(until.elementLocated(By.id('id_primary_contact_number')));
     if (primary_contact_number) {
         console.log('Primary Contact Number field is visible');
         await primary_contact_number.sendKeys(generateRandomMobileNumber());
@@ -124,7 +124,7 @@ async function findFieldandEnterDetails() {
         console.error('Primary Contact Number field is not visible');
     }
 
-    let work_email = await driver.wait(until.elementLocated(By.id('id_work_email')), 10000);
+    let work_email = await driver.wait(until.elementLocated(By.id('id_work_email')));
     if (work_email) {
         console.log('Primary Work Email field is visible');
 
@@ -140,7 +140,7 @@ async function findFieldandEnterDetails() {
 // selecting the company from the dropdown
 async function selectCompany() {
     //wait for the company dropdown to be visible
-    await driver.wait(until.elementLocated(By.id('select2-id_company-container')), 15000);
+    await driver.wait(until.elementLocated(By.id('select2-id_company-container')));
     // await driver.sleep(2000);
     await driver.wait(until.elementLocated(By.id('select2-id_company-container'))).click();
     let company_selected = "1 Finances";
@@ -153,7 +153,7 @@ async function selectCompany() {
 };
 // selecting the brand name from the dropdown
 async function selectBrandName() {
-    await driver.wait(until.elementLocated(By.xpath("//input[@placeholder='Select Brands']")), 10000);
+    await driver.wait(until.elementLocated(By.xpath("//input[@placeholder='Select Brands']")));
     let brandEnter = 'Patanjali';
     // 'p-testB2';
     // 'Patanjali'
@@ -171,7 +171,7 @@ async function selectBrandName() {
 async function selectSalesIncharge() {
 
     // locate and click on Add another Sales in charge button
-    await driver.wait(until.elementLocated(By.xpath("//a[@href='#' and text()='Add another Sales incharge']")), 10000);
+    await driver.wait(until.elementLocated(By.xpath("//a[@href='#' and text()='Add another Sales incharge']")));
     await driver.findElement(By.xpath("//a[@href='#' and text()='Add another Sales incharge']")).click();
     //take a screenshot after clicking on Add another Sales in charge button
     await takeScreenshot(driver, 'add_another_sales_buttonCLicked');
@@ -179,7 +179,7 @@ async function selectSalesIncharge() {
 
     //find span to click for the drop down to open
     // select2-id_sales_incharges-0-user_profile-container
-    await driver.wait(until.elementLocated(By.id('select2-id_sales_incharges-0-user_profile-container')), 10000);
+    await driver.wait(until.elementLocated(By.id('select2-id_sales_incharges-0-user_profile-container')));
     await driver.findElement(By.id('select2-id_sales_incharges-0-user_profile-container')).click();
     //click and enter the details
     await driver.findElement(By.xpath("//span[@class='select2-search select2-search--dropdown']/input")).sendKeys('e3');
@@ -193,7 +193,7 @@ async function selectSalesIncharge() {
 //a[@href='#' and text()='Add another Sales incharge comment']
 async function enterSalesInchargeComment() {
     //find add another sales incharge comment button and click it
-    await driver.wait(until.elementLocated(By.xpath("//a[@href='#' and text()='Add another Sales incharge comment']")), 10000);
+    await driver.wait(until.elementLocated(By.xpath("//a[@href='#' and text()='Add another Sales incharge comment']")));
     await driver.findElement(By.xpath("//a[@href='#' and text()='Add another Sales incharge comment']")).click();
 
     console.log('Add another Sales incharge comment button clicked successfully');
@@ -219,7 +219,7 @@ async function enterSalesInchargeComment() {
 
 //click on save and continue button
 async function clickSaveAndContinue() {
-    await driver.wait(until.elementLocated(By.xpath("//input[@type='submit' and @value='Save and continue editing']")), 5000);
+    await driver.wait(until.elementLocated(By.xpath("//input[@type='submit' and @value='Save and continue editing']")));
     await driver.findElement(By.xpath("//input[@type='submit' and @value='Save and continue editing']")).click();
 
     console.log('Save and continue button clicked successfully');
