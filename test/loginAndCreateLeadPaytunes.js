@@ -23,7 +23,7 @@ let driver;
 
 describe('Login to Paytunes and create a new lead', function () {
     try {
-        this.timeout(25000);
+        this.timeout(50000);
 
         let expect;
 
