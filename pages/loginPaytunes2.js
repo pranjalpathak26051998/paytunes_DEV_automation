@@ -227,7 +227,23 @@ async function clickSaveAndContinue() {
     await takeScreenshot(driver, 'continue_button_screenshot');
     await driver.sleep(2000);
 };
-
+async function runAndCreateLead(){
+    await setupDriver();
+    await accessWebsite();
+    await enterUsername();
+    await enterPassword();
+    await clickLogin();
+    await clickOnCRM();
+    await navigateToUnifiedLeads();
+    await clickAddLeads();
+    await findFieldandEnterDetails();
+    await selectCompany();
+    await selectBrandName();
+    await selectSalesIncharge();
+    await enterSalesInchargeComment();
+    await clickSaveAndContinue();
+};
+runAndCreateLead();
 
 module.exports = {
     setupDriver,

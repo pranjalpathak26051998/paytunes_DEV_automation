@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "testRunLoginPaytunes" : "pages/loginPaytunes.js",
-    "test_loginAndCreateLead": "mocha --reporter mochawesome --timeout 50000 test/loginAndCreateLeadPaytunes.js"
+    "test_loginAndCreateLead": "mocha --reporter mochawesome --timeout 50000 test/loginAndCreateLeadPaytunes.js",
+    "test_loginAndSyncRO": "mocha --reporter mochawesome --timeout 50000 test/loginAndSyncRO.js"
+
   },
   "author": "Pranjal Pathak",
   "license": "ISC",
