@@ -227,6 +227,37 @@ async function clickSaveAndContinue() {
     await takeScreenshot(driver, 'continue_button_screenshot');
     await driver.sleep(2000);
 };
+//go back to view site for order
+async function clickViewSite() {
+    await driver.wait(until.elementLocated(By.xpath("//a[@href='/' and @class='sidebar-link icon']")), 10000);
+    await driver.findElement(By.xpath("//a[@href='/' and @class='sidebar-link icon']")).click();
+    await takeScreenshot(driver, 'view_site_clicked');
+    console.log("Clicked on view site successfully");
+};
+
+//click on order button 
+async function clickOrder(){
+    await driver.wait(until.elementLocated(By.xpath("//h2[text()='Order']")),10000);
+    await driver.findElement(By.xpath("//h2[text()='Order']")).click();
+    await takeScreenshot(driver,'click_order');
+    console.log("clicked on order successfully");
+};
+
+//click on see al ROs
+async function seeAllROs(){
+    await driver.wait(until.elementLocated(By.xpath("//a[@href='/order/order/ro/']")),10000);
+    await driver.findElement(By.xpath("//a[@href='/order/order/ro/']")).click();
+    await takeScreenshot(driver,'see_all_ROs');
+    console.log("clicked on see all ROs successfully");
+};
+//click on sync RO button
+async function syncRO(){
+    await driver.wait(until.elementLocated(By.xpath("//a[@href='/order/order/ro/sync_ro/']")),10000);
+    await driver.findElement(By.xpath("//a[@href='/order/order/ro/sync_ro/']")).click();
+    await takeScreenshot(driver, 'sync_RO_btn');
+    console.log("clicked on sync RO button successfully");
+};
+
 async function runAndCreateLead() {
     try {
         await setupDriver();
@@ -243,6 +274,12 @@ async function runAndCreateLead() {
         await selectSalesIncharge();
         await enterSalesInchargeComment();
         await clickSaveAndContinue();
+        await clickViewSite();
+        await driver.sleep(3000);
+        await clickOrder();
+        await seeAllROs();
+        await syncRO();
+        await driver.sleep(2000);
 
     } catch (error) {
         console.log('Error:', error);
@@ -253,6 +290,7 @@ async function runAndCreateLead() {
 // runAndCreateLead();
 
 module.exports = {
+    driver,
     setupDriver,
     closeDriver,
     accessWebsite,
@@ -267,7 +305,11 @@ module.exports = {
     selectBrandName,
     selectSalesIncharge,
     enterSalesInchargeComment,
-    clickSaveAndContinue
+    clickSaveAndContinue,
+    clickViewSite,
+    clickOrder,
+    seeAllROs,
+    syncRO    
 };
 
 

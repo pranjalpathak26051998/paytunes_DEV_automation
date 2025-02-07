@@ -2,15 +2,19 @@ const { Builder, Browser, key, By, until } = require('selenium-webdriver');
 const fs = require('fs');
 const path = require('path');
 const mocha = require('mocha');
+require('dotenv').config();
 const {
     setupDriver,
     closeDriver,
     accessWebsite,
     enterUsername,
     enterPassword,
-    clickLogin } = require('../pages/loginPaytunes2');
-require('dotenv').config();
-let driver; // declared driver globally here
+    clickLogin,
+    clickOrder,
+    seeAllROs,
+    syncRO } = require("../pages/loginPaytunes2");
+
+// let driver = setupDriver().driver  //new Builder().forBrowser('chrome').build();// declared driver globally here
 
 async function loginAndSyncRO() {
     try {
@@ -21,6 +25,9 @@ async function loginAndSyncRO() {
         await enterPassword();
         await clickLogin();
         await clickOrder();
+        await seeAllROs();
+        await syncRO();
+
 
     } catch (error) {
         console.log(error);
@@ -31,12 +38,9 @@ async function loginAndSyncRO() {
     };
 };
 
-async function clickOrder(){
-    await driver.wait(until.elementLocated(By.xpath("//div[@class='app-name']//div/h2[text()='Order']")),10000);
-    await driver.findElement(By.xpath("//div[@class='app-name']//div/h2[text()='Order']")).click();
-    await takeScreenshot(driver, 'order_screenshot');
-    console.log('Navigated to Order successfully');
-};
+//create an async function to click on the order so that it can be called in the loginAndSyncRO function but driver not defined here,
+// // so we need to pass the driver as a parameter to the function
+
 
 
 loginAndSyncRO();
