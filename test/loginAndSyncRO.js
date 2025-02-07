@@ -55,6 +55,7 @@ describe("Login and Sync RO on Paytunes", () => {
 
     } catch (error) {
         console.log(error);
+        // await closeDriver();
 
     }
 });
