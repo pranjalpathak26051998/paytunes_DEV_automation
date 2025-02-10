@@ -13,6 +13,7 @@ let driver;
 const websiteUrl = baseURL().baseURL;
 const username = process.env.paytunesDEV_username;
 const password = process.env.paytunesDEV_password;
+const verticalCompany = process.env.verticalCompany_dev;
 
 // Initialize WebDriver before running tests
 async function setupDriver() {
@@ -151,6 +152,30 @@ async function selectCompany() {
     //take a screenshot after selecting the company
     await takeScreenshot(driver, 'company_screenshot');
 };
+// open the drop-down of the vertical company.
+async function OpenVerticalCompanyDropDown() {
+    try {
+        await driver.wait(until.elementLocated(By.xpath("//span[@class='select2-selection__rendered' and @id='select2-id_vertical-container']")));
+        await driver.findElement(By.xpath("//span[@class='select2-selection__rendered' and @id='select2-id_vertical-container']")).click();
+        console.log('Vertical company drop-down opened successfully selected successfully');
+        await driver.sleep(2000);
+        await driver.findElement(By.xpath("//span[@class='select2-container select2-container--jet select2-container--open']//input[@class='select2-search__field']")).sendKeys(verticalCompany);
+        //span[@class='select2-container select2-container--jet select2-container--open']//span//span[2]//input
+        // await driver.wait(until.elementLocated(By.xpath("//span[@class='select2-container select2-container--jet select2-container--open']//span//span[2]//input")),10000);
+        // await driver.findElement(By.xpath("//span[@class='select2-container select2-container--jet select2-container--open']//span//span[2]//input")).sendKeys("Paytunes");
+        console.log('Vertical company selected successfully');
+        await takeScreenshot(driver, 'vertical_company_screenshot');
+        await driver.sleep(3000);
+
+    } catch (error) {
+        console.log('Error:', error);
+        await driver.quit();
+    }
+};
+
+
+
+
 // selecting the brand name from the dropdown
 async function selectBrandName() {
     await driver.wait(until.elementLocated(By.xpath("//input[@placeholder='Select Brands']")));
@@ -236,23 +261,23 @@ async function clickViewSite() {
 };
 
 //click on order button 
-async function clickOrder(){
-    await driver.wait(until.elementLocated(By.xpath("//h2[text()='Order']")),10000);
+async function clickOrder() {
+    await driver.wait(until.elementLocated(By.xpath("//h2[text()='Order']")), 10000);
     await driver.findElement(By.xpath("//h2[text()='Order']")).click();
-    await takeScreenshot(driver,'click_order');
+    await takeScreenshot(driver, 'click_order');
     console.log("clicked on order successfully");
 };
 
 //click on see al ROs
-async function seeAllROs(){
-    await driver.wait(until.elementLocated(By.xpath("//a[@href='/order/order/ro/']")),10000);
+async function seeAllROs() {
+    await driver.wait(until.elementLocated(By.xpath("//a[@href='/order/order/ro/']")), 10000);
     await driver.findElement(By.xpath("//a[@href='/order/order/ro/']")).click();
-    await takeScreenshot(driver,'see_all_ROs');
+    await takeScreenshot(driver, 'see_all_ROs');
     console.log("clicked on see all ROs successfully");
 };
 //click on sync RO button
-async function syncRO(){
-    await driver.wait(until.elementLocated(By.xpath("//a[@href='/order/order/ro/sync_ro/']")),10000);
+async function syncRO() {
+    await driver.wait(until.elementLocated(By.xpath("//a[@href='/order/order/ro/sync_ro/']")), 10000);
     await driver.findElement(By.xpath("//a[@href='/order/order/ro/sync_ro/']")).click();
     await takeScreenshot(driver, 'sync_RO_btn');
     console.log("clicked on sync RO button successfully");
@@ -270,6 +295,7 @@ async function runAndCreateLead() {
         await clickAddLeads();
         await findFieldandEnterDetails();
         await selectCompany();
+        await OpenVerticalCompanyDropDown();
         await selectBrandName();
         await selectSalesIncharge();
         await enterSalesInchargeComment();
@@ -287,7 +313,7 @@ async function runAndCreateLead() {
 
     }
 };
-// runAndCreateLead();
+runAndCreateLead();
 
 module.exports = {
     driver,
@@ -302,6 +328,7 @@ module.exports = {
     clickAddLeads,
     findFieldandEnterDetails,
     selectCompany,
+    OpenVerticalCompanyDropDown,
     selectBrandName,
     selectSalesIncharge,
     enterSalesInchargeComment,
@@ -309,7 +336,7 @@ module.exports = {
     clickViewSite,
     clickOrder,
     seeAllROs,
-    syncRO    
+    syncRO
 };
 
 

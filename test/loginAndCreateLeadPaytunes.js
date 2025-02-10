@@ -13,6 +13,7 @@ const {
     clickAddLeads,
     findFieldandEnterDetails,
     selectCompany,
+    OpenVerticalCompanyDropDown,
     selectBrandName,
     selectSalesIncharge,
     enterSalesInchargeComment,
@@ -80,6 +81,11 @@ describe('Login to Paytunes and create a new lead', function () {
         it('should select company', async function () {
             await selectCompany();
             console.log('Selected company successfully');
+        });
+
+        it('should select vertical company', async function(){
+            await OpenVerticalCompanyDropDown();
+            console.log('Opened vertical company drop down successfully');
         });
 
         it('should select brand name', async function () {
